@@ -194,20 +194,22 @@ equalUsed = Boolean;
 divideB = document.querySelector('.divideB')
 divideB.addEventListener('click', function(){
     myOperator = '/'
-    ///make a version of this for the others!
-    if (isNaN(screen.textContent.slice(-1)) === false && screen.textContent.slice(-1) !== '.') {
+    ///make a version for the others
+    if (isNaN(screen.textContent.slice(-1)) === false ) {
         screen.textContent = equationChecker();
+        equalUsed = false;
+        preOperand = '/';
         return screen.textContent
     }
-    else if (screen.textContent.slice(-1) === '.'|| screen.textContent.slice(0,1) === '' ) {
-        return screen.textContent = screen.textContent
+    else if (screen.textContent.slice(-1) === '.') {
+        return screen.textContent
     }
     else {
     screen.textContent += '/';
     equalUsed = false;
     decimalCheck = false;
     preOperand = '/'}
-    return screen.textContent
+   // return screen.textContent
 });
 
 
@@ -361,6 +363,10 @@ function equationChecker() {
     }
 
     } 
+    else {
+        screen.textContent += myOperator
+        return screen.textContent
+    }
 }
 
 
