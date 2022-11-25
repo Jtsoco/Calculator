@@ -163,18 +163,28 @@ let answer
 equals = document.querySelector('.equals')
 equals.addEventListener('click', function(){
     operand = preOperand;
-    if (mathHolder[0] == false || mathHolder[1] == false) {
-        return 
+    if (preOperand === ''|| preOperand == undefined) {
+        return screen.textContent=screen.textContent
+    }
+    else {screenArray = screen.textContent.split(/[^0-9|.]/);
+    if (screenArray[1] === ''){
+        return screen.textContent = screen.textContent
+    }
+    else if (screenArray[1] == false) {
+        return screen.textContent = screen.textContent
+    }
+    else {mathHolder[0] = screenArray[0];
+        mathHolder[1] = screenArray[1];
+        answer =  operate (mathHolder[0],mathHolder[1],operand)
+        screen.textContent = answer
+        mathHolder[0] = answer;
+        preOperand = '';
+        return screen.textContent
+
     }
 
-    else { screenArray = screen.textContent.split(/[^0-9|.]/);
-    mathHolder[0] = screenArray[0];
-    mathHolder[1] = screenArray[1];
-    answer =  operate (mathHolder[0],mathHolder[1],operand)
-    screen.textContent = answer
-    return screen.textContent
-    }
-    
+
+}
 
 
 
