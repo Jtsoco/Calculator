@@ -46,3 +46,26 @@ if (c === '/') {
 const mathHolder = [];
 mathDigitOne = mathHolder[0];
 mathDigitTwo = mathHolder[1];
+
+//buttonValue is what will change when buttons are pressed
+buttonValue = 
+
+
+//the screen with the display value is edited by this code
+screen = document.querySelector('.inner-screen');
+screen.textContent = "I'm the display!"
+//put this part into event listener functions
+screen.textContent += buttonValue
+
+//the clear button
+clear = document.querySelector('.clear');
+clear.addEventListener('click', function(){
+    screen.textContent = ''
+})
+
+//the values for the numerical buttons
+one = document.querySelector('.one')
+one.addEventListener('click', function(){
+    screen.textContent += '1'
+});
+
