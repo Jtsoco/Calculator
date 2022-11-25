@@ -193,15 +193,25 @@ equalUsed = Boolean;
 //and make that the text content too
 divideB = document.querySelector('.divideB')
 divideB.addEventListener('click', function(){
-    if (isNaN(screen.textContent.slice(-1)) === true || screen.textContent.slice(0,1) === '' ) {
-        return screen.textContent=screen.textContent
+    myOperator = '/'
+    ///make a version of this for the others!
+    if (isNaN(screen.textContent.slice(-1)) === false && screen.textContent.slice(-1) !== '.') {
+        screen.textContent = equationChecker();
+        return screen.textContent
+    }
+    else if (screen.textContent.slice(-1) === '.'|| screen.textContent.slice(0,1) === '' ) {
+        return screen.textContent = screen.textContent
     }
     else {
     screen.textContent += '/';
     equalUsed = false;
     decimalCheck = false;
     preOperand = '/'}
+    return screen.textContent
 });
+
+
+
 multiplyB = document.querySelector('.multiplyB')
 multiplyB.addEventListener('click', function(){
     //tests to make sure there isn't a stacking of operator signs
@@ -213,6 +223,10 @@ multiplyB.addEventListener('click', function(){
     decimalCheck = false;
     preOperand = '*'
 });
+
+
+
+
 subtractB = document.querySelector('.subtractB')
 subtractB.addEventListener('click', function(){
     //subtraction gets special edition, so it can add negatives where ever.
@@ -328,17 +342,23 @@ else {
 //this is a function to check if you already have an equation in
 //before you use other signs
 function equationChecker() {
+    operand = preOperand
     tempScreenArray = screen.textContent.split(/\*|\/|(?<=[0-9])\+|(?<=[0-9])\-/)
-    if (tempScreenArray[1] === true) {mathHolder[0] = tempScreenArray[0];
+    if (tempScreenArray.length === 2) {mathHolder[0] = tempScreenArray[0];
         mathHolder[1] = tempScreenArray[1];
         answer =  operate (mathHolder[0],mathHolder[1],operand)
         screen.textContent = answer
         mathHolder[0] = answer;
+        tempScreenArray = [];
         if (answer == 'Infinity') {
             alert("Don't do that! No matter how many zeros you stack on, it won't work!");
             return screen.textContent = ''
         }
-        return screen.textContent + ''
+        else {
+            
+    screen.textContent =  screen.textContent + myOperator;
+    return screen.textContent
+    }
 
     } 
 }
@@ -351,7 +371,8 @@ function equationChecker() {
 
 
 
-
+//make a version of equation checker for other function buttons!
+//be careful with -
 
 
 
