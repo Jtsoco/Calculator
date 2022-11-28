@@ -217,13 +217,21 @@ divideB.addEventListener('click', function(){
 multiplyB = document.querySelector('.multiplyB')
 multiplyB.addEventListener('click', function(){
     //tests to make sure there isn't a stacking of operator signs
-    if (isNaN(screen.textContent.slice(-1)) === true || screen.textContent.slice(0,1) === '' ) {
-        return screen.textContent=screen.textContent
+    myOperator = '*';
+    if (isNaN(screen.textContent.slice(-1)) === false ) {
+        screen.textContent = equationChecker();
+        equalUsed = false;
+        preOperand = '*';
+        return screen.textContent}
+    else if (screen.textContent.slice(-1) === '.') {
+        return screen.textContent;
+
     }
+    else {
     screen.textContent += '*';
     equalUsed = false;
     decimalCheck = false;
-    preOperand = '*'
+    preOperand = '*'}
 });
 
 
@@ -231,14 +239,30 @@ multiplyB.addEventListener('click', function(){
 
 subtractB = document.querySelector('.subtractB')
 subtractB.addEventListener('click', function(){
+    myOperator = '-'
     //subtraction gets special edition, so it can add negatives where ever.
     if (
-        screen.textContent.slice(-2) === '--'|| screen.textContent.slice(0,3) ==='-')
+        screen.textContent.slice(-2) === '--'|| screen.textContent.slice(0,3) ==='-'||screen.textContent.slice(-2) === '+-'||screen.textContent.slice(-2) === '/-'
+        ||screen.textContent.slice(-2) === '*-'||screen.textContent.slice(-2) === '.')
         {return screen.textContent=screen.textContent   }
-    screen.textContent += '-';
+        else if  (screen.textContent.slice(-1) == '+' ||screen.textContent.slice(-1) == '*' || screen.textContent.slice(-1) == '/') {
+            screen.textContent += '-';
+             equalUsed = false;
+            decimalCheck = false;
+            return screen.textContent = screen.textContent
+
+        }
+        else if (isNaN(screen.textContent.slice(-1)) === false ) { screen.textContent = equationChecker();
+            equalUsed = false;
+            return screen.textContent
+
+        }
+    else { screen.textContent += '-';
     equalUsed = false;
     decimalCheck = false;
-    preOperand = '-'
+    preOperand = '-';
+    }
+   
 });
 addB = document.querySelector('.addB')
 addB.addEventListener('click', function(){
@@ -364,7 +388,8 @@ function equationChecker() {
 
     } 
     else {
-        screen.textContent += myOperator
+        preOperand = myOperator
+        screen.textContent += myOperator;
         return screen.textContent
     }
 }
