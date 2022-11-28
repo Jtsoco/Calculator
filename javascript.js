@@ -72,7 +72,10 @@ clear.addEventListener('click', function(){
     operand = '';
     preOperand = '';
     mathHolder = [];
-    screenArray = []
+    screenArray = [];
+    decimalCheck = false;
+    myOperator = '';
+    equalUsed = false;
 })
 
 
@@ -347,6 +350,7 @@ equals.addEventListener('click', function(){
         }
         preOperand = '';
         equalUsed = true;
+        decimalCheck = false;
         return screen.textContent
 
     }
@@ -394,6 +398,7 @@ function equationChecker() {
         else {
             
     screen.textContent =  screen.textContent + myOperator;
+    decimalCheck = false;
     return screen.textContent
     }
 
@@ -401,6 +406,7 @@ function equationChecker() {
     else {
         preOperand = myOperator
         screen.textContent += myOperator;
+        decimalCheck = false;
         return screen.textContent
     }
 }
