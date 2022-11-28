@@ -181,8 +181,12 @@ zero.addEventListener('click', function(){
 //the percent button, divide by 100 to get a percent
 percent = document.querySelector('.percent')
 percent.addEventListener('click', function(){
-    percentTemp = (+screen.textContent)/100;
-    screen.textContent = percentTemp
+    if (screen.textContent.split(/\*|\/|(?<=[0-9])\+|(?<=[0-9])\-/).length !== 1) {
+        return screen.textContent = screen.textContent
+
+    }
+    else {percentTemp = (+screen.textContent)/100;
+    screen.textContent = percentTemp}
 });
 
 equalUsed = Boolean;
@@ -243,7 +247,7 @@ subtractB.addEventListener('click', function(){
     //subtraction gets special edition, so it can add negatives where ever.
     if (
         screen.textContent.slice(-2) === '--'|| screen.textContent.slice(0,3) ==='-'||screen.textContent.slice(-2) === '+-'||screen.textContent.slice(-2) === '/-'
-        ||screen.textContent.slice(-2) === '*-'||screen.textContent.slice(-2) === '.')
+        ||screen.textContent.slice(-2) === '*-'||screen.textContent.slice(-1) === '.')
         {return screen.textContent=screen.textContent   }
         else if  (screen.textContent.slice(-1) == '+' ||screen.textContent.slice(-1) == '*' || screen.textContent.slice(-1) == '/') {
             screen.textContent += '-';
@@ -266,14 +270,21 @@ subtractB.addEventListener('click', function(){
 });
 addB = document.querySelector('.addB')
 addB.addEventListener('click', function(){
-    if (isNaN(screen.textContent.slice(-1)) === true || screen.textContent.slice(0,1) === '' ) {
-        return screen.textContent=screen.textContent
+    myOperator = "+"
+    if (isNaN(screen.textContent.slice(-1)) === false ) {
+        screen.textContent = equationChecker();
+        equalUsed = false;
+        preOperand = '+';
+    }
+    else if (screen.textContent.slice(-1) === '.') {
+        return screen.textContent;
+
     }
     
-    screen.textContent += '+';
+    else {screen.textContent += '+';
     equalUsed = false;
     decimalCheck = false;
-    preOperand = '+'
+    preOperand = '+'}
 });
 
 
@@ -395,15 +406,7 @@ function equationChecker() {
 }
 
 
-//the split function, will ignore decimals and numbers splitting along function lines
-//turn this into function
-//call this function when equals sign is pressed
-//screenArray = screen.textContent.split(/[^0-9|.]/)
-
-
-
-//make a version of equation checker for other function buttons!
-//be careful with -
-
+//make it look nicer,
+//clean up redundant aspects
 
 
