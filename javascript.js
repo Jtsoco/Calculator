@@ -387,7 +387,7 @@ function equationChecker() {
         screen.textContent = answer
         mathHolder[0] = answer;
         tempScreenArray = [];
-        if (answer == 'Infinity') {
+        if (answer == 'Infinity' || answer == 'NaN') {
             alert("Don't do that! No matter how many zeros you stack on, it won't work!");
             return screen.textContent = ''
         }
